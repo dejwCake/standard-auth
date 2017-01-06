@@ -8,7 +8,7 @@ Router::prefix('admin', ['_namePrefix' => 'admin:'], function ($routes) {
         'DejwCake/StandardAuth',
         ['path' => '/'],
         function (RouteBuilder $routes) {
-            $routes->scope('/:language', function (RouteBuilder $routes) {
+//            $routes->scope('/:language', function (RouteBuilder $routes) {
                 $routes->connect('/login', ['controller' => 'Users', 'action' => 'login', 'plugin' => 'DejwCake/StandardAuth', '_ext' => null]);
                 $routes->scope('/users', function (RouteBuilder $routes) {
                     $routes->connect('/', ['controller' => 'Users', 'action' => 'index', 'plugin' => 'DejwCake/StandardAuth', '_ext' => null]);
@@ -26,7 +26,7 @@ Router::prefix('admin', ['_namePrefix' => 'admin:'], function ($routes) {
                     $routes->connect('/delete/:id', ['controller' => 'Roles', 'action' => 'delete', 'plugin' => 'DejwCake/StandardAuth', '_ext' => null], ['pass' => ['id'],]);
                     $routes->connect('/enable/:id', ['controller' => 'Roles', 'action' => 'enable', 'plugin' => 'DejwCake/StandardAuth', '_ext' => null], ['pass' => ['id'],]);
                 });
-            });
+//            });
 //        $routes->fallbacks(DashedRoute::class);
         });
 });

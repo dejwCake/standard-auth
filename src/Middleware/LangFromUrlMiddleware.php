@@ -9,6 +9,7 @@ class LangFromUrlMiddleware
 {
     public function __invoke($request, $response, $next)
     {
+        //TODO move to Standard Web
         $params = $request->getAttribute('params', []);
         if(!empty($params['language'])) {
             $supportedLanguages = Configure::read('App.supportedLanguages');

@@ -44,21 +44,9 @@ class RolesController extends AppController
      */
     public function view($id = null)
     {
-        $this->Roles->locale('en');
         $role = $this->Roles->get($id, [
             'contain' => ['Users']
         ]);
-        debug(I18n::locale());
-        debug($role);
-        $role->translation('sk_sk')->title = 'Otro Título1';
-        $role->translation('en_US')->title = 'Un autre Titre1';
-        $this->Roles->save($role);
-        $role = $this->Roles->get($id, [
-            'contain' => ['Users']
-        ]);
-        debug(I18n::locale());
-        debug($role->title);
-        debug($role->translation('sk_sk'));
 
         $this->set('role', $role);
         $this->set('_serialize', ['role']);
