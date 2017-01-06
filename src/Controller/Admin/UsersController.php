@@ -2,7 +2,6 @@
 namespace DejwCake\StandardAuth\Controller\Admin;
 
 use Cake\Event\Event;
-use DejwCake\StandardAuth\Controller\AppController;
 
 /**
  * Users Controller
@@ -11,8 +10,6 @@ use DejwCake\StandardAuth\Controller\AppController;
  */
 class UsersController extends AppController
 {
-
-
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['index', 'view', 'display']);

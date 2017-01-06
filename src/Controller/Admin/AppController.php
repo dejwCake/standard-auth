@@ -1,6 +1,6 @@
 <?php
 
-namespace DejwCake\StandardAuth\Controller;
+namespace DejwCake\StandardAuth\Controller\Admin;
 
 use App\Controller\AppController as BaseController;
 use Cake\Core\Configure;

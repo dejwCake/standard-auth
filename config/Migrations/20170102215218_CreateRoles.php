@@ -19,6 +19,12 @@ class CreateRoles extends AbstractMigration
             'name' => 'ROLES_NAME_UNIQUE',
             'unique' => true,
         ]);
+        $table->addColumn('title', 'string', [
+            'limit' => 255,
+        ])->addIndex(['name'], [
+            'name' => 'ROLES_TITLE_UNIQUE',
+            'unique' => true,
+        ]);
         $table->addColumn('enabled', 'boolean', [
             'default' => true,
         ]);
@@ -36,7 +42,7 @@ class CreateRoles extends AbstractMigration
         ]);
         $table->create();
 
-        $table = $this->table('role_i18ns');
+        $table = $this->table('roles_i18n');
         $table->addColumn('locale', 'string', [
             'default' => null,
             'limit' => 6,
