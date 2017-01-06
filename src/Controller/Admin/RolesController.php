@@ -19,7 +19,7 @@ class RolesController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['index', 'view', 'display', 'add']);
+        $this->Auth->allow(['index', 'view', 'add', 'edit', 'enable','delete']);
     }
 
     /**
