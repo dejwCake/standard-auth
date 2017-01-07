@@ -48,9 +48,9 @@ class UsersFixture extends TestFixture
             'password' => 'Lorem ipsum dolor sit amet',
             'remember_token' => 'Lorem ipsum dolor sit amet',
             'activated' => 1,
-            'created' => '2017-01-02 22:33:48',
-            'modified' => '2017-01-02 22:33:48',
-            'deleted' => '2017-01-02 22:33:48'
+            'created' => '2017-01-06 22:40:30',
+            'modified' => '2017-01-06 22:40:30',
+            'deleted' => '2017-01-06 22:40:30'
         ],
     ];
 }

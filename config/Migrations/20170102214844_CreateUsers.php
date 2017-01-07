@@ -15,9 +15,6 @@ class CreateUsers extends AbstractMigration
         $table = $this->table('users');
         $table->addColumn('email', 'string', [
             'limit' => 255,
-        ])->addIndex(['email'], [
-            'name' => 'USERS_EMAIL_UNIQUE',
-            'unique' => true,
         ]);
         $table->addColumn('password', 'string', [
             'limit' => 255,
@@ -40,6 +37,10 @@ class CreateUsers extends AbstractMigration
         $table->addColumn('deleted', 'datetime', [
             'default' => null,
             'null' => false,
+        ]);
+        $table->addIndex(['email', 'deleted'], [
+            'name' => 'USERS_EMAIL_DELETED_UNIQUE',
+            'unique' => true,
         ]);
         $table->create();
     }

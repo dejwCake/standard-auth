@@ -25,15 +25,29 @@
                         <dd>
                             <?= h($role->name) ?>
                         </dd>
-                        <dt><?= __('Title') ?></dt>
+                        <dt><?= __('Title ({0})', $supportedLanguages[$defaultLanguage]['title']) ?></dt>
                         <dd>
                             <?= h($role->title) ?>
                         </dd>
+                        <?php foreach ($supportedLanguages as $language => $languageSettings): ?>
+                            <?php if($languageSettings['locale'] == $defaultLocale) { continue; } ?>
+                            <dt><?= __('Title ({0})', $languageSettings['title']) ?></dt>
+                            <dd>
+                                <?= h($role->translation($languageSettings['locale'])->title) ?>
+                            </dd>
+                        <?php endforeach; ?>
                         <dt><?= __('Enabled') ?></dt>
                         <dd>
                             <?= $role->enabled ? __('Yes') : __('No'); ?>
                         </dd>
-
+                        <dt><?= __('Created') ?></dt>
+                        <dd>
+                            <?= h($role->created) ?>
+                        </dd>
+                        <dt><?= __('Modified') ?></dt>
+                        <dd>
+                            <?= h($role->modified) ?>
+                        </dd>
                     </dl>
                 </div>
                 <!-- /.box-body -->
@@ -55,86 +69,30 @@
                 <div class="box-body table-responsive no-padding">
 
                     <?php if (!empty($role->users)): ?>
-
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-
-                                <th>
-                                    Id
-                                </th>
-
-
                                 <th>
                                     Email
                                 </th>
-
-
-                                <th>
-                                    Password
-                                </th>
-
-
-                                <th>
-                                    Remember Token
-                                </th>
-
-
-                                <th>
-                                    Activated
-                                </th>
-
-
-                                <th>
-                                    Deleted
-                                </th>
-
-
                                 <th>
                                     <?php echo __('Actions'); ?>
                                 </th>
                             </tr>
-
                             <?php foreach ($role->users as $users): ?>
                                 <tr>
-
-                                    <td>
-                                        <?= h($users->id) ?>
-                                    </td>
-
                                     <td>
                                         <?= h($users->email) ?>
                                     </td>
-
-                                    <td>
-                                        <?= h($users->password) ?>
-                                    </td>
-
-                                    <td>
-                                        <?= h($users->remember_token) ?>
-                                    </td>
-
-                                    <td>
-                                        <?= h($users->activated) ?>
-                                    </td>
-
-                                    <td>
-                                        <?= h($users->deleted) ?>
-                                    </td>
-
                                     <td class="actions">
                                         <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id], ['class' => 'btn btn-info btn-xs']) ?>
-
                                         <?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $users->id], ['class' => 'btn btn-warning btn-xs']) ?>
-
                                         <?= $this->Form->postLink(__('Delete'), ['controller' => 'Users', 'action' => 'delete', $users->id], ['confirm' => __('Are you sure you want to delete # {0}?', $users->id), 'class' => 'btn btn-danger btn-xs']) ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-
                             </tbody>
                         </table>
-
                     <?php endif; ?>
 
                 </div>

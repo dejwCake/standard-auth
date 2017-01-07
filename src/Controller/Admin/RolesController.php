@@ -3,10 +3,7 @@ namespace DejwCake\StandardAuth\Controller\Admin;
 
 use Cake\Event\Event;
 use Cake\I18n\I18n;
-use DejwCake\StandardAuth\Controller\Admin\AppController;
-use Cake\Network\Exception\BadRequestException;
-use Cake\Network\Exception\ConflictException;
-use Cake\Routing\Router;
+use Cake\Log\Log;
 
 /**
  * Roles Controller
@@ -16,6 +13,12 @@ use Cake\Routing\Router;
 class RolesController extends AppController
 {
 
+    /**
+     * Before filter callback.
+     *
+     * @param \Cake\Event\Event $event The beforeRender event.
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -44,9 +47,9 @@ class RolesController extends AppController
      */
     public function view($id = null)
     {
-        $role = $this->Roles->get($id, [
+        $role = $this->Roles->find('translations', [
             'contain' => ['Users']
-        ]);
+        ])->where(['id' => $id])->firstOrFail();
 
         $this->set('role', $role);
         $this->set('_serialize', ['role']);
@@ -69,7 +72,7 @@ class RolesController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                //TODO log errors
+                Log::error('Entity could not be saved. Entity: '.var_export($role, true));
                 $this->Flash->error(__('The role could not be saved. Please, try again.'));
             }
         }
@@ -87,20 +90,24 @@ class RolesController extends AppController
      */
     public function edit($id = null)
     {
-        $role = $this->Roles->get($id, [
+        $role = $this->Roles->find('translations', [
             'contain' => ['Users']
-        ]);
+        ])->where(['id' => $id])->firstOrFail();
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $role = $this->Roles->patchEntity($role, $this->request->data);
+            $role = $this->Roles->patchEntity($role, $this->request->data, [
+                'translations' => true
+            ]);
             if ($this->Roles->save($role)) {
                 $this->Flash->success(__('The role has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
+                Log::error('Entity could not be saved. Entity: '.var_export($role, true));
                 $this->Flash->error(__('The role could not be saved. Please, try again.'));
             }
         }
         $users = $this->Roles->Users->find('list', ['limit' => 200]);
+        $role = $this->editTranslated($role);
         $this->set(compact('role', 'users'));
         $this->set('_serialize', ['role']);
     }
@@ -137,12 +144,7 @@ class RolesController extends AppController
         $this->request->allowMethod(['post']);
         $role = $this->Roles->get($id);
 
-        if($role->get('enabled') == 1) {
-            $role->set('enabled', 0);
-        } else {
-            $role->set('enabled', 1);
-        }
-
+        $role->changeEnableStatus();
         if ($this->Roles->save($role)) {
             $this->Flash->success(__('The role status has been changed.'));
         } else {

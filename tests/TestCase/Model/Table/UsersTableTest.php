@@ -27,6 +27,8 @@ class UsersTableTest extends TestCase
         'plugin.dejw_cake/standard_auth.users',
         'plugin.dejw_cake/standard_auth.user_activations',
         'plugin.dejw_cake/standard_auth.roles',
+        'plugin.dejw_cake/standard_auth.roles_title_translation',
+        'plugin.dejw_cake/standard_auth.roles_i18n',
         'plugin.dejw_cake/standard_auth.roles_users'
     ];
 

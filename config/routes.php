@@ -10,6 +10,7 @@ Router::prefix('admin', ['_namePrefix' => 'admin:'], function ($routes) {
         function (RouteBuilder $routes) {
 //            $routes->scope('/:language', function (RouteBuilder $routes) {
                 $routes->connect('/login', ['controller' => 'Users', 'action' => 'login', 'plugin' => 'DejwCake/StandardAuth', '_ext' => null]);
+                $routes->connect('/logout', ['controller' => 'Users', 'action' => 'logout', 'plugin' => 'DejwCake/StandardAuth', '_ext' => null]);
                 $routes->scope('/users', function (RouteBuilder $routes) {
                     $routes->connect('/', ['controller' => 'Users', 'action' => 'index', 'plugin' => 'DejwCake/StandardAuth', '_ext' => null]);
                     $routes->connect('/add', ['controller' => 'Users', 'action' => 'add', 'plugin' => 'DejwCake/StandardAuth', '_ext' => null]);

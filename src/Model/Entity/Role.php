@@ -3,6 +3,7 @@ namespace DejwCake\StandardAuth\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\ORM\Behavior\Translate\TranslateTrait;
+use DejwCake\StandardAuth\Model\Entity\Helper\EnableTrait;
 
 /**
  * Role Entity
@@ -20,6 +21,7 @@ use Cake\ORM\Behavior\Translate\TranslateTrait;
 class Role extends Entity
 {
     use TranslateTrait;
+    use EnableTrait;
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

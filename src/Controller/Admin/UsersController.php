@@ -1,7 +1,12 @@
 <?php
 namespace DejwCake\StandardAuth\Controller\Admin;
 
+use DejwCake\StandardAuth\Controller\Admin\AppController;
+use Cake\Network\Exception\BadRequestException;
+use Cake\Network\Exception\ConflictException;
+use Cake\Routing\Router;
 use Cake\Event\Event;
+use Cake\Log\Log;
 
 /**
  * Users Controller
@@ -10,27 +15,52 @@ use Cake\Event\Event;
  */
 class UsersController extends AppController
 {
+
+    /**
+     * Before filter callback.
+     *
+     * @param \Cake\Event\Event $event The beforeRender event.
+     * @return \Cake\Network\Response|null|void
+     */
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'view', 'display']);
+        parent::beforeFilter($event);
+//        $this->Auth->allow(['login', 'logout', 'index', 'add', 'edit', 'enable','delete']);
+        $this->Auth->allow(['login']);
     }
 
-    public function isAuthorized($user)
-    {
-        // All registered users can add articles
-        if ($this->request->action === 'add') {
-            return true;
-        }
+    /**
+     * Check if the provided user is authorized for the request.
+     *
+     * @param array|\ArrayAccess|null $user The user to check the authorization of.
+     *   If empty the user fetched from storage will be used.
+     * @param \Cake\Network\Request|null $request The request to authenticate for.
+     *   If empty, the current request will be used.
+     * @return bool True if $user is authorized, otherwise false
+     */
+    public function isAuthorized($user = null) {
 
-//        // The owner of an article can edit and delete it
-//        if (in_array($this->request->action, ['edit', 'delete'])) {
-//            $articleId = (int)$this->request->params['pass'][0];
-//            if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
+//        if (in_array($this->action, array('admin_add', 'admin_index'))) {
+//            if ($user['Group']['id'] == 1 || $user['Group']['id'] == 2)
+//            {
 //                return true;
 //            }
 //        }
-
-        return parent::isAuthorized($user);
+//
+//        // The owner of a post can edit and delete it
+//        if (in_array($this->action, array('admin_edit', 'admin_delete', 'admin_view', 'admin_disable'))) {
+//            $userId = $this->request->params['pass'][0];
+//            if ($this->User->isGroupOk($userId, $user['Group']['id'])) {
+//                return true;
+//            }
+//        }
+//        $result = parent::isAuthorized($user);
+//        if ($result) return true;
+//        else {
+////            $this->redirect(array('controller' => 'users','action' => 'dashboard', 'language' => Configure::read('Config.language')));
+//            return false;
+//        }
+        return parent::isAuthorized($user);;
     }
 
     /**
@@ -78,9 +108,11 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             } else {
+                Log::error('Entity could not be saved. Entity: '.var_export($user, true));
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
+        //TODO show only roles lower than current auth user role
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
@@ -99,15 +131,21 @@ class UsersController extends AppController
             'contain' => ['Roles']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            if ($this->request->data['password_new'] !== '') {
+                $this->request->data('password', $this->request->data['password_new']);
+                unset($this->request->data['password_new']);
+            }
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
+                Log::error('Entity could not be saved. Entity: '.var_export($user, true));
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
+        unset($this->request->data['password_new']);
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
@@ -147,6 +185,7 @@ class UsersController extends AppController
 
                 return $this->redirect($this->Auth->redirectUrl());
             }
+            Log::error('Login attempt for email: '.$this->request->data('email'));
             $this->Flash->error(__('Invalid credentials, try again'));
         }
 

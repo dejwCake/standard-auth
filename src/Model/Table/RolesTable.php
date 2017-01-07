@@ -1,6 +1,7 @@
 <?php
 namespace DejwCake\StandardAuth\Model\Table;
 
+use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -108,5 +109,32 @@ class RolesTable extends Table
         $rules->add($rules->isUnique(['name']));
 
         return $rules;
+    }
+
+    /**
+     * @param Query $query
+     * @param array $options
+     * @return Query
+     */
+    public function findForUser(Query $query, array $options)
+    {
+        $query = $query
+            ->select(['id', 'title']);
+
+        $user = $options['user'];
+        if(!empty($user['roles'])) {
+            $userRoles = [];
+            foreach ($user['roles'] as $userRole) {
+                $userRoles[] = $userRole['name'];
+            }
+            if(in_array('superadmin', $userRoles)) {
+
+            } else if(in_array('admin', $userRoles)) {
+                $query = $query->where(['Role.name NOT LIKE' => 'superadmin']);
+            } else {
+                $query = $query->where(['1' => '0']);
+            }
+        }
+        return $query->find('list', ['limit' => 200]);
     }
 }

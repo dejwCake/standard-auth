@@ -80,6 +80,18 @@ class UsersTable extends Table
         $validator
             ->allowEmpty('remember_token');
 
+        $validator
+            ->boolean('activated')
+            ->requirePresence('activated', 'create')
+            ->notEmpty('activated');
+
+        $validator->add('roles', 'custom', [
+            'rule' => function($value) {
+                return (bool)(is_array($value['_ids']) && count($value['_ids']) > 0);
+            },
+            'message' => __('Please select at least one item.')
+        ]);
+
         return $validator;
     }
 
@@ -92,6 +104,7 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        //TODO make Custom Rule Objects
         $rules->add(function ($entity, $options) use ($rules) {
             $query = $options['repository']->find('all')
                 ->where(['Users.email' =>  $entity->email])
@@ -120,6 +133,7 @@ class UsersTable extends Table
     public function findAuth(Query $query, array $options)
     {
         $query
+            ->contain(['Roles'])
             ->where(['Users.activated' => 1]);
 
         return $query;

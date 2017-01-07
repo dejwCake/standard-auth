@@ -1,8 +1,9 @@
 <?php
 namespace DejwCake\StandardAuth\Model\Entity;
 
-use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
+use Cake\Auth\DefaultPasswordHasher;
+use JeremyHarris\LazyLoad\ORM\LazyLoadEntityTrait;
 
 /**
  * User Entity
@@ -21,7 +22,7 @@ use Cake\ORM\Entity;
  */
 class User extends Entity
 {
-
+    use LazyLoadEntityTrait;
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -45,7 +46,6 @@ class User extends Entity
         'password'
     ];
 
-
     /**
      * Hash password before save
      *
@@ -54,6 +54,42 @@ class User extends Entity
      */
     protected function _setPassword($password)
     {
-        return (new DefaultPasswordHasher)->hash($password);
+        if (strlen($password) > 0) {
+            return (new DefaultPasswordHasher)->hash($password);
+        }
+    }
+
+    public function hasRole($checkRole) {
+        foreach ($this->roles as $role) {
+            if($role->name == $checkRole) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function canEdit($user)
+    {
+        if(!empty($user['roles'])) {
+            $userRoles = [];
+            foreach ($user['roles'] as $userRole) {
+                $userRoles[] = $userRole['name'];
+            }
+            $thisRoles = [];
+            foreach ($this->roles as $thisRole) {
+                $thisRoles[] = $thisRole->get('name');
+            }
+            if(in_array('superadmin', $userRoles)) {
+                return true;
+            } else if(in_array('admin', $userRoles) && in_array('superadmin', $thisRoles)) {
+                return false;
+            } else if(in_array('admin', $userRoles) && in_array('admin', $thisRoles)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }
