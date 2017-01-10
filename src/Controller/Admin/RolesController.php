@@ -22,7 +22,22 @@ class RolesController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['index', 'view', 'add', 'edit', 'enable','delete']);
+    }
+
+    /**
+     * Check if the provided user is authorized for the request.
+     *
+     * @param array|\ArrayAccess|null $user The user to check the authorization of.
+     *   If empty the user fetched from storage will be used.
+     * @param \Cake\Network\Request|null $request The request to authenticate for.
+     *   If empty, the current request will be used.
+     * @return bool True if $user is authorized, otherwise false
+     */
+    public function isAuthorized($user = null) {
+        if($user->hasRole('superadmin')) {
+            return true;
+        }
+        return parent::isAuthorized($user);;
     }
 
     /**

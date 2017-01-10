@@ -21,7 +21,7 @@ class CreateRoles extends AbstractMigration
         ]);
         $table->addColumn('title', 'string', [
             'limit' => 255,
-        ])->addIndex(['name'], [
+        ])->addIndex(['title'], [
             'name' => 'ROLES_TITLE_UNIQUE',
             'unique' => true,
         ]);
@@ -38,7 +38,7 @@ class CreateRoles extends AbstractMigration
         ]);
         $table->addColumn('deleted', 'datetime', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->create();
 

@@ -39,7 +39,8 @@ class UsersController extends AppController
      * @return bool True if $user is authorized, otherwise false
      */
     public function isAuthorized($user = null) {
-
+        //TODO add controller action ACL
+//        debug($user->hasRole('superadmin'));
 //        if (in_array($this->action, array('admin_add', 'admin_index'))) {
 //            if ($user['Group']['id'] == 1 || $user['Group']['id'] == 2)
 //            {
@@ -70,6 +71,7 @@ class UsersController extends AppController
      */
     public function index()
     {
+        //TODO show only users with role lower and equal then auth user
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
@@ -112,7 +114,7 @@ class UsersController extends AppController
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
-        //TODO show only roles lower than current auth user role
+        //TODO show only roles lower or equal than current auth user role
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
@@ -127,6 +129,7 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        //TODO check if editing user with lower or equal role
         $user = $this->Users->get($id, [
             'contain' => ['Roles']
         ]);
@@ -160,6 +163,7 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        //TODO check if deleting user with lower or equal role
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
@@ -171,6 +175,8 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    //TODO add profile page
+
     /**
      * Login method
      *
@@ -181,7 +187,9 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
-                $this->Auth->setUser($user);
+                $this->Auth->setUser($this->Users->get($user['id'], [
+                    'contain' => ['Roles']
+                ]));
 
                 return $this->redirect($this->Auth->redirectUrl());
             }

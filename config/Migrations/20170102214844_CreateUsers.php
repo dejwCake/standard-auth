@@ -36,7 +36,7 @@ class CreateUsers extends AbstractMigration
         ]);
         $table->addColumn('deleted', 'datetime', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addIndex(['email', 'deleted'], [
             'name' => 'USERS_EMAIL_DELETED_UNIQUE',

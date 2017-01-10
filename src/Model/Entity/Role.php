@@ -3,7 +3,7 @@ namespace DejwCake\StandardAuth\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\ORM\Behavior\Translate\TranslateTrait;
-use DejwCake\StandardAuth\Model\Entity\Helper\EnableTrait;
+use DejwCake\Helpers\Model\Entity\EnableTrait;
 
 /**
  * Role Entity

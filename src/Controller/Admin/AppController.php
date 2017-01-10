@@ -16,7 +16,8 @@ class AppController extends BaseController
      */
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow([]);
+        parent::beforeFilter($event);
+//        $this->Auth->allow([]);
     }
 
     /**
@@ -30,17 +31,5 @@ class AppController extends BaseController
         parent::beforeRender($event);
         $this->viewBuilder()->theme('DejwCake/AdminLTE');
         $this->set('theme', Configure::read('Theme'));
-    }
-
-    protected function editTranslated($object)
-    {
-        //TODO move to better place
-        list($plugin, $class) = pluginSplit($this->modelClass, true);
-        if($this->{$class}->behaviors()->has('Translate')) {
-            foreach ($this->{$class}->behaviors()->get('Translate')->config('fields') as $field) {
-                $object->translation(Configure::read('App.defaultLocale'))->{$field} = $object->{$field};
-            }
-        }
-        return $object;
     }
 }
