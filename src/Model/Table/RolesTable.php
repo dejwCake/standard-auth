@@ -65,6 +65,11 @@ class RolesTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+        $translationValidator = new Validator();
+        $translationValidator
+            ->requirePresence('title', 'create')
+            ->allowEmpty('title');
+
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
@@ -78,21 +83,10 @@ class RolesTable extends Table
             ->requirePresence('title', 'create')
             ->notEmpty('title');
 
-        // Nested Validation for i18n fields (Translate Behaviour)
-        // These rules will apply to all 'title' fields in all additional languages
-        $translationValidator = new Validator();
-        $translationValidator
-            ->requirePresence('title', 'create') // I want translation to be optional
-            ->allowEmpty('title');
-        ;
-        // Now apply the nested validator to the "main" validation
-        // ('_translations' is containing the translated input data)
         $validator
             ->addNestedMany('_translations', $translationValidator)
-            // To prevent "field is required" for the "_translations" data
             ->requirePresence('_translations', 'false')
-            ->allowEmpty('_translations')
-        ;
+            ->allowEmpty('_translations');
 
         return $validator;
     }
