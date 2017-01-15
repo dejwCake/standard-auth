@@ -43,7 +43,11 @@
                                 <div class="tab-pane <?php if ($selectedLanguage == $language): ?>active<?php endif; ?>"
                                      id="tab_<?= $i ?>">
                                     <?php
-                                        echo $this->Form->input('_translations.' . $languageSettings['locale'] . '.title');
+                                        if($languageSettings['locale'] == $defaultLocale){
+                                            echo $this->Form->input('title');
+                                        } else {
+                                            echo $this->Form->input('_translations.' . $languageSettings['locale'] . '.title');
+                                        }
                                     ?>
                                 </div>
                                 <?php $i++; ?>

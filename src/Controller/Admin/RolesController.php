@@ -122,7 +122,6 @@ class RolesController extends AppController
             }
         }
         $users = $this->Roles->Users->find('list', ['limit' => 200]);
-        $role = $this->editTranslated($role);
         $this->set(compact('role', 'users'));
         $this->set('_serialize', ['role']);
     }

@@ -139,10 +139,11 @@ class UsersController extends AppController
                 unset($this->request->data['password_new']);
             }
             $user = $this->Users->patchEntity($user, $this->request->data);
+            debug($user);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+//                return $this->redirect(['action' => 'index']);
             } else {
                 Log::error('Entity could not be saved. Entity: '.var_export($user, true));
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));

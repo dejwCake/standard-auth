@@ -21,10 +21,7 @@ class CreatePasswordResets extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ])->addIndex(['token']);
-        $table->addColumn('created', 'datetime', [
-            'default' => null,
-            'null' => false,
-        ]);
+        $table->addColumn('created', 'datetime');
         $table->create();
     }
 }
