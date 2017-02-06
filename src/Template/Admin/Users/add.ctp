@@ -22,7 +22,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <?= $this->Form->create($user, array('role' => 'form')) ?>
+                <?= $this->Form->create($user, ['role' => 'form']) ?>
                 <div class="box-body">
                     <?php
                         echo $this->Form->input('email');
