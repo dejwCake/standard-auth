@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        Role
+        <?= __('Role') ?>
         <small><?= __('Edit') ?></small>
     </h1>
     <ol class="breadcrumb">
