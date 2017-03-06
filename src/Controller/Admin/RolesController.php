@@ -83,12 +83,12 @@ class RolesController extends AppController
                 'translations' => true
             ]);
             if ($this->Roles->save($role)) {
-                $this->Flash->success(__('The role has been saved.'));
+                $this->Flash->success(__d('dejw_cake_standard_auth', 'The role has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
                 Log::error('Entity could not be saved. Entity: '.var_export($role, true));
-                $this->Flash->error(__('The role could not be saved. Please, try again.'));
+                $this->Flash->error(__d('dejw_cake_standard_auth', 'The role could not be saved. Please, try again.'));
             }
         }
         $users = $this->Roles->Users->find('list', ['limit' => 200]);
@@ -113,12 +113,12 @@ class RolesController extends AppController
                 'translations' => true
             ]);
             if ($this->Roles->save($role)) {
-                $this->Flash->success(__('The role has been saved.'));
+                $this->Flash->success(__d('dejw_cake_standard_auth', 'The role has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
                 Log::error('Entity could not be saved. Entity: '.var_export($role, true));
-                $this->Flash->error(__('The role could not be saved. Please, try again.'));
+                $this->Flash->error(__d('dejw_cake_standard_auth', 'The role could not be saved. Please, try again.'));
             }
         }
         $users = $this->Roles->Users->find('list', ['limit' => 200]);
@@ -138,9 +138,9 @@ class RolesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
         if ($this->Roles->delete($role)) {
-            $this->Flash->success(__('The role has been deleted.'));
+            $this->Flash->success(__d('dejw_cake_standard_auth', 'The role has been deleted.'));
         } else {
-            $this->Flash->error(__('The role could not be deleted. Please, try again.'));
+            $this->Flash->error(__d('dejw_cake_standard_auth', 'The role could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -160,9 +160,9 @@ class RolesController extends AppController
 
         $role->changeEnableStatus();
         if ($this->Roles->save($role)) {
-            $this->Flash->success(__('The role status has been changed.'));
+            $this->Flash->success(__d('dejw_cake_standard_auth', 'The role status has been changed.'));
         } else {
-            $this->Flash->error(__('The role status could not be changed. Please, try again.'));
+            $this->Flash->error(__d('dejw_cake_standard_auth', 'The role status could not be changed. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

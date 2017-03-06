@@ -105,12 +105,12 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__d('dejw_cake_standard_auth', 'The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
                 Log::error('Entity could not be saved. Entity: '.var_export($user, true));
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__d('dejw_cake_standard_auth', 'The user could not be saved. Please, try again.'));
             }
         }
         //TODO show only roles lower or equal than current auth user role
@@ -140,12 +140,12 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->data);
             debug($user);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__d('dejw_cake_standard_auth', 'The user has been saved.'));
 
 //                return $this->redirect(['action' => 'index']);
             } else {
                 Log::error('Entity could not be saved. Entity: '.var_export($user, true));
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__d('dejw_cake_standard_auth', 'The user could not be saved. Please, try again.'));
             }
         }
         unset($this->request->data['password_new']);
@@ -167,9 +167,9 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__d('dejw_cake_standard_auth', 'The user has been deleted.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__d('dejw_cake_standard_auth', 'The user could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -194,7 +194,7 @@ class UsersController extends AppController
                 return $this->redirect($this->Auth->redirectUrl());
             }
             Log::error('Login attempt for email: '.$this->request->data('email'));
-            $this->Flash->error(__('Invalid credentials, try again'));
+            $this->Flash->error(__d('dejw_cake_standard_auth', 'Invalid credentials, try again'));
         }
 
         $this->viewBuilder()->layout('login');

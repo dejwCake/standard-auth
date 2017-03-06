@@ -89,7 +89,7 @@ class UsersTable extends Table
             'rule' => function($value) {
                 return (bool)(is_array($value['_ids']) && count($value['_ids']) > 0);
             },
-            'message' => __('Please select at least one item.')
+            'message' => __d('dejw_cake_standard_auth', 'Please select at least one item.')
         ]);
 
         return $validator;
@@ -119,7 +119,7 @@ class UsersTable extends Table
             }
         },'EmailUnique', [
             'errorField' => 'email',
-            'message' => 'This value is not unique'
+            'message' => __d('dejw_cake_standard_auth', 'This value is not unique.')
         ]);
 
         return $rules;

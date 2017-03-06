@@ -1,0 +1,229 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2017-03-07 00:36+0100\n"
+"PO-Revision-Date: 2017-03-07 00:36+0100\n"
+"Last-Translator: \n"
+"Language-Team: EMAIL@ADDRESS\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Poedit 1.8.12\n"
+
+#: Controller/Admin/RolesController.php:86;116
+msgid "The role has been saved."
+msgstr "Rola bola úspešne uložená."
+
+#: Controller/Admin/RolesController.php:91;121
+msgid "The role could not be saved. Please, try again."
+msgstr "Rolu sa nepodarilo uložiť. Prosím, skúste ešte raz."
+
+#: Controller/Admin/RolesController.php:141
+msgid "The role has been deleted."
+msgstr "Rola bola zmazaná."
+
+#: Controller/Admin/RolesController.php:143
+msgid "The role could not be deleted. Please, try again."
+msgstr "Rolu sa nepodarilo zmazať. Prosím, skúste ešte raz."
+
+#: Controller/Admin/RolesController.php:163
+msgid "The role status has been changed."
+msgstr "Stav role je úspešne zmenený."
+
+#: Controller/Admin/RolesController.php:165
+msgid "The role status could not be changed. Please, try again."
+msgstr "Stav role sa nepodarilo zmeniť. Prosím, skúste ešte raz."
+
+#: Controller/Admin/UsersController.php:108;143
+msgid "The user has been saved."
+msgstr "Používateľ bol úspešne uložený."
+
+#: Controller/Admin/UsersController.php:113;148
+msgid "The user could not be saved. Please, try again."
+msgstr "Používateľa sa nepodarilo uložiť. Prosim, skúste ešte raz."
+
+#: Controller/Admin/UsersController.php:170
+msgid "The user has been deleted."
+msgstr "Používateľ bol zmazaný."
+
+#: Controller/Admin/UsersController.php:172
+msgid "The user could not be deleted. Please, try again."
+msgstr "Používateľa sa nepodarilo zmazať. Prosím, skúste ešte raz."
+
+#: Controller/Admin/UsersController.php:197
+msgid "Invalid credentials, try again"
+msgstr "Nesprávne meno alebo heslo. Prosím, skúste ešte raz."
+
+#: Model/Table/UsersTable.php:92
+msgid "Please select at least one item."
+msgstr "Prosím zvoľte aspoň jednu položku."
+
+#: Model/Table/UsersTable.php:122
+msgid "This value is not unique."
+msgstr "Táto hodnota musí byť jedinečná."
+
+#: Template/Admin/Roles/add.ctp:3 Template/Admin/Roles/edit.ctp:3
+#: Template/Admin/Roles/view.ctp:3
+msgid "Role"
+msgstr "Rola"
+
+#: Template/Admin/Roles/add.ctp:4 Template/Admin/Users/add.ctp:4
+msgid "Add"
+msgstr "Pridať"
+
+#: Template/Admin/Roles/add.ctp:8 Template/Admin/Roles/edit.ctp:8
+#: Template/Admin/Roles/view.ctp:7 Template/Admin/Users/add.ctp:8
+#: Template/Admin/Users/edit.ctp:8 Template/Admin/Users/view.ctp:7
+msgid "Back"
+msgstr "Späť"
+
+#: Template/Admin/Roles/add.ctp:21 Template/Admin/Roles/edit.ctp:21
+#: Template/Admin/Users/add.ctp:21 Template/Admin/Users/edit.ctp:21
+msgid "Form"
+msgstr "Formulár"
+
+#: Template/Admin/Roles/add.ctp:62 Template/Admin/Roles/edit.ctp:62
+#: Template/Admin/Users/add.ctp:38 Template/Admin/Users/edit.ctp:38
+msgid "Save"
+msgstr "Uložiť"
+
+#: Template/Admin/Roles/edit.ctp:4 Template/Admin/Roles/index.ctp:52
+#: Template/Admin/Roles/view.ctp:89 Template/Admin/Users/edit.ctp:4
+#: Template/Admin/Users/index.ctp:42 Template/Admin/Users/view.ctp:90;145
+msgid "Edit"
+msgstr "Zmeniť"
+
+#: Template/Admin/Roles/index.ctp:4
+msgid "Roles"
+msgstr "Role"
+
+#: Template/Admin/Roles/index.ctp:5 Template/Admin/Users/index.ctp:5
+msgid "New"
+msgstr "Nový"
+
+#: Template/Admin/Roles/index.ctp:15
+msgid "List of Roles"
+msgstr "Zoznam rôl"
+
+#: Template/Admin/Roles/index.ctp:28;66 Template/Admin/Roles/view.ctp:79
+#: Template/Admin/Users/index.ctp:27;56 Template/Admin/Users/view.ctp:74;129
+msgid "Actions"
+msgstr "Akcie"
+
+#: Template/Admin/Roles/index.ctp:38 Template/Admin/Roles/view.ctp:41
+#: Template/Admin/Users/index.ctp:36 Template/Admin/Users/view.ctp:30
+msgid "Yes"
+msgstr "Áno"
+
+#: Template/Admin/Roles/index.ctp:38 Template/Admin/Roles/view.ctp:41
+#: Template/Admin/Users/index.ctp:36 Template/Admin/Users/view.ctp:30
+msgid "No"
+msgstr "Nie"
+
+#: Template/Admin/Roles/index.ctp:42
+msgid "Disable"
+msgstr "Zakázať"
+
+#: Template/Admin/Roles/index.ctp:42
+msgid "Are you sure you want to disable this entry?"
+msgstr "Ste si istý, že chcete zakázať túto položku?"
+
+#: Template/Admin/Roles/index.ctp:44
+msgid "Enable"
+msgstr "Povoliť"
+
+#: Template/Admin/Roles/index.ctp:44
+msgid "Are you sure you want to enable this entry?"
+msgstr "Ste si istý, že chcete povoliť túto položku?"
+
+#: Template/Admin/Roles/index.ctp:51 Template/Admin/Roles/view.ctp:88
+#: Template/Admin/Users/index.ctp:41 Template/Admin/Users/view.ctp:89;144
+msgid "View"
+msgstr "Detail"
+
+#: Template/Admin/Roles/index.ctp:53 Template/Admin/Roles/view.ctp:90
+#: Template/Admin/Users/index.ctp:43 Template/Admin/Users/view.ctp:91;146
+msgid "Delete"
+msgstr "Zmazať"
+
+#: Template/Admin/Roles/index.ctp:53 Template/Admin/Users/index.ctp:43
+msgid "Are you sure you want to delete this entry?"
+msgstr "Ste si istý, že chcete vymazať túto položku?"
+
+#: Template/Admin/Roles/view.ctp:19 Template/Admin/Users/view.ctp:19
+msgid "Information"
+msgstr "Informácie"
+
+#: Template/Admin/Roles/view.ctp:24
+msgid "Name"
+msgstr "Meno"
+
+#: Template/Admin/Roles/view.ctp:28;34
+msgid "Title ({0})"
+msgstr "Názov ({0})"
+
+#: Template/Admin/Roles/view.ctp:39
+msgid "Enabled"
+msgstr "Povolené"
+
+#: Template/Admin/Roles/view.ctp:43 Template/Admin/Users/view.ctp:32
+msgid "Created"
+msgstr "Vytvorené"
+
+#: Template/Admin/Roles/view.ctp:47 Template/Admin/Users/view.ctp:36
+msgid "Modified"
+msgstr "Zmenené"
+
+#: Template/Admin/Roles/view.ctp:66 Template/Admin/Users/view.ctp:55;110
+msgid "Related {0}"
+msgstr "Príbuzný {0}"
+
+#: Template/Admin/Roles/view.ctp:90 Template/Admin/Users/view.ctp:91;146
+msgid "Are you sure you want to delete # {0}?"
+msgstr "﻿Ste si istí, že chcete vymazať # {0}?"
+
+#: Template/Admin/Users/add.ctp:3 Template/Admin/Users/edit.ctp:3
+#: Template/Admin/Users/view.ctp:3
+msgid "User"
+msgstr "Používateľ"
+
+#: Template/Admin/Users/add.ctp:33 Template/Admin/Users/edit.ctp:33
+msgid "Select Role"
+msgstr "Zvoliť rolu"
+
+#: Template/Admin/Users/edit.ctp:29
+msgid "New password (Leave blank if you do not want to change password.)"
+msgstr "Nové heslo (Nechajte prázdne ak nechcete heslo meniť.)"
+
+#: Template/Admin/Users/index.ctp:4
+msgid "Users"
+msgstr "Používatelia"
+
+#: Template/Admin/Users/index.ctp:15
+msgid "List of Users"
+msgstr "Zoznam používateľov"
+
+#: Template/Admin/Users/index.ctp:23 Template/Admin/Users/login.ctp:5
+#: Template/Admin/Users/view.ctp:24
+msgid "E-mail"
+msgstr "E-mail"
+
+#: Template/Admin/Users/index.ctp:24 Template/Admin/Users/view.ctp:28
+msgid "Activated"
+msgstr "Aktivovaný"
+
+#: Template/Admin/Users/login.ctp:6
+msgid "Password"
+msgstr "Heslo"
+
+#: Template/Admin/Users/login.ctp:8
+msgid "Login"
+msgstr "Prihlásenie"
+
+#~ msgid "List of"
+#~ msgstr "Zoznam"
