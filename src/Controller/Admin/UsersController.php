@@ -71,7 +71,7 @@ class UsersController extends AppController
     public function index()
     {
         //TODO show only users with role lower and equal then auth user
-        $users = $this->paginate($this->Users);
+        $users = $this->Users->find('all');
 
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
