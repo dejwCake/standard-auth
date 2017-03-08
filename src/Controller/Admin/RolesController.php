@@ -48,7 +48,6 @@ class RolesController extends AppController
     public function index()
     {
         $roles = $this->Roles->find('all');
-        //TODO fix, not showing anything
         $this->set(compact('roles'));
         $this->set('_serialize', ['roles']);
     }

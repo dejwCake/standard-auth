@@ -33,7 +33,7 @@ class CreateRoles extends AbstractMigration
             'default' => null,
         ]);
         $table->addColumn('deleted', 'datetime', [
-            'default' => null,
+//            'default' => null,
             'null' => true,
         ]);
         $table->create();

@@ -2,7 +2,9 @@
 <section class="content-header">
     <h1>
         <?= __d('dejw_cake_standard_auth', 'Roles')?>
+        <?php if(!$authUser->hasRole('superadmin')):?>
         <div class="pull-right"><?= $this->Html->link(__d('dejw_cake_standard_auth', 'New'), ['action' => 'add'], ['class' => 'btn btn-success btn-xs']) ?></div>
+        <?php endif; ?>
     </h1>
 </section>
 

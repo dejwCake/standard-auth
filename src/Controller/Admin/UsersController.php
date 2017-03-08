@@ -72,7 +72,6 @@ class UsersController extends AppController
     {
         //TODO show only users with role lower and equal then auth user
         $users = $this->Users->find('all');
-
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
