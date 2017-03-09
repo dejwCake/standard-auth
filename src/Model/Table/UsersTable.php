@@ -36,9 +36,9 @@ class UsersTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('users');
-        $this->displayField('email');
-        $this->primaryKey('id');
+        $this->setTable('users');
+        $this->setDisplayField('email');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
         $this->addBehavior('Muffin/Trash.Trash');

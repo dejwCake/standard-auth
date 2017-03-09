@@ -37,9 +37,9 @@ class RolesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('roles');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('roles');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
         $this->addBehavior('Muffin/Trash.Trash');
@@ -124,11 +124,15 @@ class RolesTable extends Table
             if(in_array('superadmin', $userRoles)) {
 
             } else if(in_array('admin', $userRoles)) {
-                $query = $query->where(['Role.name NOT LIKE' => 'superadmin']);
+                $query = $query->where(['Roles.name NOT LIKE' => 'superadmin']);
             } else {
                 $query = $query->where(['1' => '0']);
             }
         }
-        return $query->find('list', ['limit' => 200]);
+        return $query->find('list', [
+            'limit' => 200,
+            'keyField' => 'id',
+            'valueField' => 'title'
+        ]);
     }
 }

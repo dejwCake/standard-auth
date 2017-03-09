@@ -1,6 +1,7 @@
 <?php
 namespace DejwCake\StandardAuth\Controller\Admin;
 
+use Cake\Collection\Collection;
 use DejwCake\StandardAuth\Controller\Admin\AppController;
 use Cake\Network\Exception\BadRequestException;
 use Cake\Network\Exception\ConflictException;
@@ -71,7 +72,26 @@ class UsersController extends AppController
     public function index()
     {
         //TODO show only users with role lower and equal then auth user
-        $users = $this->Users->find('all');
+        $currentUser = $this->Auth->user();
+        $users = $this->Users->find()
+//            ->contain(['Roles'])
+            ->matching('Roles', function ($q) use ($currentUser) {
+            if(!empty($currentUser['roles'])) {
+                $userRoles = [];
+                foreach ($currentUser['roles'] as $userRole) {
+                    $userRoles[] = $userRole['name'];
+                }
+                if(in_array('superadmin', $userRoles)) {
+
+                } else if(in_array('admin', $userRoles)) {
+                    $q = $q->where(['Roles.name NOT LIKE' => 'superadmin']);
+                } else {
+                    $q = $q->where(['Roles.name NOT IN' => ['superadmin', 'admin']]);
+                }
+            }
+            return $q;
+        });
+
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
@@ -112,8 +132,7 @@ class UsersController extends AppController
                 $this->Flash->error(__d('dejw_cake_standard_auth', 'The user could not be saved. Please, try again.'));
             }
         }
-        //TODO show only roles lower or equal than current auth user role
-        $roles = $this->Users->Roles->find('list', ['limit' => 200]);
+        $roles = $this->Users->Roles->find('forUser', ['limit' => 200, 'user' => $this->Auth->user()]);
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
     }
@@ -137,7 +156,6 @@ class UsersController extends AppController
                 unset($this->request->data['password_new']);
             }
             $user = $this->Users->patchEntity($user, $this->request->data);
-            debug($user);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__d('dejw_cake_standard_auth', 'The user has been saved.'));
 
@@ -148,7 +166,7 @@ class UsersController extends AppController
             }
         }
         unset($this->request->data['password_new']);
-        $roles = $this->Users->Roles->find('list', ['limit' => 200]);
+        $roles = $this->Users->Roles->find('forUser', ['limit' => 200, 'user' => $this->Auth->user()]);
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
     }
