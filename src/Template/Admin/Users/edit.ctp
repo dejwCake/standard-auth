@@ -25,12 +25,12 @@
                 <?= $this->Form->create($user, ['role' => 'form']) ?>
                 <div class="box-body">
                     <?php
-                        echo $this->Form->input('email');
+                        echo $this->Form->input('email', ['label' => __d('dejw_cake_standard_auth', 'E-mail')]);
                         echo $this->Form->input('password_new', array('type'=>'password', 'label' => __d('dejw_cake_standard_auth', 'New password (Leave blank if you do not want to change password.)'), 'value' => ''));
-                        echo $this->Form->input('activated');
+                        echo $this->Form->input('activated', ['label' => __d('dejw_cake_standard_auth', 'Activated')]);
                     ?>
                     <?php
-                        echo $this->Form->input('roles._ids', ['options' => $roles, 'class' => 'select2', 'data-placeholder' => __d('dejw_cake_standard_auth', 'Select Role')]);
+                        echo $this->Form->input('roles._ids', ['options' => $roles, 'class' => 'select2', 'data-placeholder' => __d('dejw_cake_standard_auth', 'Select Role'), 'label' => __d('dejw_cake_standard_auth', 'Roles')]);
                     ?>
                 </div>
                 <!-- /.box-body -->

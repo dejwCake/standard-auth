@@ -25,8 +25,8 @@
                 <?= $this->Form->create($role, ['role' => 'form']) ?>
                 <div class="box-body">
                     <?php
-                    echo $this->Form->input('name');
-                    echo $this->Form->input('enabled');
+                    echo $this->Form->input('name', ['label' => __d('dejw_cake_standard_auth', 'Name')]);
+                    echo $this->Form->input('enabled', ['label' => __d('dejw_cake_standard_auth', 'Enabled')]);
                     ?>
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
@@ -44,9 +44,9 @@
                                      id="tab_<?= $i ?>">
                                     <?php
                                         if($languageSettings['locale'] == $defaultLocale){
-                                            echo $this->Form->input('title');
+                                            echo $this->Form->input('title', ['label' => __d('dejw_cake_standard_auth', 'Title')]);
                                         } else {
-                                            echo $this->Form->input('_translations.' . $languageSettings['locale'] . '.title');
+                                            echo $this->Form->input('_translations.' . $languageSettings['locale'] . '.title', ['label' => __d('dejw_cake_standard_auth', 'Title')]);
                                         }
                                     ?>
                                 </div>
