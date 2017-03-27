@@ -1,6 +1,7 @@
 <?php
 namespace DejwCake\StandardAuth\Model\Table;
 
+use Cake\Core\Configure;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -125,6 +126,9 @@ class RolesTable extends Table
 
             } else if(in_array('admin', $userRoles)) {
                 $query = $query->where(['Roles.name NOT LIKE' => 'superadmin']);
+                if(!Configure::read('StandardAuth.showUserRole')) {
+                    $query = $query->where(['Roles.name NOT LIKE' => 'user']);
+                }
             } else {
                 $query = $query->where(['1' => '0']);
             }
